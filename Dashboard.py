@@ -174,7 +174,7 @@ if nav=='Predictions':
 
         # Predicting the Test set results
         y_pred = classifier.predict(X_test)
-        print(np.concatenate((y_pred.reshape(len(y_pred),1), y_test.reshape(len(y_test),1)),1))
+        
 
         # Making the Confusion Matrix
         from sklearn.metrics import confusion_matrix, accuracy_score
@@ -337,7 +337,7 @@ if nav=='Predictions':
 
             # Predicting the Test set results
             y_pred = classifier.predict(X_test)
-            print(np.concatenate((y_pred.reshape(len(y_pred),1), y_test.reshape(len(y_test),1)),1))
+            
 
             # Making the Confusion Matrix
             from sklearn.metrics import confusion_matrix, accuracy_score
