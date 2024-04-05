@@ -550,7 +550,6 @@ if nav=='Predictions':
     elif option=="Diabetes Prediciton":
 
         st.title("Diabetes Prediction")
-        st_lottie(url3_json)
         st.write('''Here on our Diabetes Prediction page, we're using machine learning smart tools to help predict
                 diabetes. Remember, these tools are just helpers and not a substitute for talking to a doctor. 
                 It's super important to always chat with a healthcare professional for the best advice about your health.''')
@@ -843,6 +842,7 @@ Say goodbye to uncertainty and hello to proactive health management with HealthM
 
 elif nav=="General Information":
     st.title("General Information 📖🔬")
+    st_lottie(url2_json)
     genopt = st.selectbox("What do you want to know about", ("Diabetes", "Brain Tumor", "Heart Diseases", "Alzheimer", "Mental Stress"))
     if genopt=="Diabetes":
         st.title("1. DIABETES")
