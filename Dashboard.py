@@ -567,7 +567,8 @@ if nav=='Predictions':
                             st.subheader("Result : " + prediction)
                             st.write("Accuracy for 15 epochs is 92.38%")
                         elif result[0][0] == 3:
-                            prediction = 'pituitary'st.subheader("Result : " + prediction)
+                            prediction = 'pituitary'
+                            st.subheader("Result : " + prediction)
                             st.write("Accuracy for 15 epochs is 92.38%")
                             
                     except:
