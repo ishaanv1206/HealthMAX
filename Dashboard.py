@@ -85,7 +85,7 @@ else:
 
 
 st.sidebar.title('Navigation')
-nav = st.sidebar.radio('Go to: ',('Home', 'General Information', 'General Awareness', 'Predictions', 'About'))
+nav = st.sidebar.radio('Go to: ',('Home', 'General Information', 'Predictions', 'About'))
 if nav=='Predictions':
 
     option =st.selectbox("What do you want to know : ", ("Diabetes Prediciton" ,"Brain tumor detection","Stress detection through sleep pattern","Human Stress Detection", "Alzheimer Prediction", "Heart Disease Prediction"))
