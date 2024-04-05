@@ -6,6 +6,7 @@ import json
 import requests 
 from streamlit_lottie import st_lottie 
 import tensorflow as tf
+import keras
 
 #loading animations
 
@@ -546,7 +547,7 @@ if nav=='Predictions':
                 # Part 4 - Making a single prediction
                 print(training_set.class_indices)
                 import numpy as np
-                from keras.preprocessing import image
+                
                 if uploaded_file is not None:
                     try:
                         test_image = image.load_img('uploaded_file', target_size = (64, 64))
