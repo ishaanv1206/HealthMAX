@@ -454,12 +454,20 @@ if nav=='Predictions':
                         training_set.class_indices
                         if result[0][0] == 0:
                             prediction = 'Mild-Demented'
+                            st.subheader("Result : " + prediction)
+                            st.write("Accuracy for 15 epochs is 74.03%")
                         elif result[0][0] == 1:
                             prediction = 'Moderate-Demented'
+                            st.subheader("Result : " + prediction)
+                            st.write("Accuracy for 15 epochs is 74.03%")
                         elif result[0][0] == 2:
                             prediction = 'Non-Demented'
+                            st.subheader("Result : " + prediction)
+                            st.write("Accuracy for 15 epochs is 74.03%")
                         elif result[0][0] == 3:
                             prediction = 'VeryMildDemented'
+                            st.subheader("Result : " + prediction)
+                            st.write("Accuracy for 15 epochs is 74.03%")
                     except:
                         st.write("There is error in file provided")
                     st.subheader("Result : " + prediction)
@@ -548,16 +556,23 @@ if nav=='Predictions':
                         training_set.class_indices
                         if result[0][0] == 0:
                             prediction = 'Glioma'
+                            st.subheader("Result : " + prediction)
+                            st.write("Accuracy for 15 epochs is 92.38%")
                         elif result[0][0] == 1:
                             prediction = 'Meningioma'
+                            st.subheader("Result : " + prediction)
+                            st.write("Accuracy for 15 epochs is 92.38%")
                         elif result[0][0] == 2:
                             prediction = 'No Tumor'
+                            st.subheader("Result : " + prediction)
+                            st.write("Accuracy for 15 epochs is 92.38%")
                         elif result[0][0] == 3:
-                            prediction = 'pituitary'
+                            prediction = 'pituitary'st.subheader("Result : " + prediction)
+                            st.write("Accuracy for 15 epochs is 92.38%")
+                            
                     except:
                         st.write("There is error in file provided")
-                    st.subheader("Result : " + prediction)
-                    st.write("Accuracy for 15 epochs is 74.03%")
+                    
                 elif uploaded_file is None:
                     st.markdown(":red[Please enter a image]")
 
