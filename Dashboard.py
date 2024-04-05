@@ -180,7 +180,8 @@ if nav=='Predictions':
             from sklearn.metrics import confusion_matrix, accuracy_score
             cm = confusion_matrix(y_test, y_pred)
             acc = accuracy_score(y_test, y_pred)
-            new_data = [[sexvar, agevar, chestpainvar, bpvar, cholestrolvar, fbsoveronevar, ecgvar, exerciseanginavar, maxhrvar, stdepressionvar, slopeofstvar, noofvesselsflurovar, thalliumvar]]
+            new_data= [agevar, sexvar, chestpainvar, bpvar, cholestrolvar, fbsoveronevar, ecgvar, maxhrvar, exerciseanginavar, stdepressionvar, slopeofstvar, noofvesselsflurovar, thalliumvar]
+
             result = classifier.predict(sc.transform(new_data))
             if result==[0]:
                 st.markdown(":red[***You have chances of having heart disease***]")
