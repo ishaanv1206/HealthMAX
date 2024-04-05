@@ -120,7 +120,7 @@ if nav=='Predictions':
         bpvar = st.number_input("Enter your BP (Systolic)", step=1)
         cholestrolvar = st.number_input("Enter your Cholestrol Level", step=1)
         fbs = st.selectbox("Is your FBS over 1 ? ", ("Yes", "No"))
-        #ekgresult, exercise angina left
+        
         if fbs=="Yes":
             fbsoveronevar = 1
         else:
@@ -138,6 +138,7 @@ if nav=='Predictions':
         thalliumvar =st.number_input("Enter your Thallium", step=1)
         submit = st.button("Submit")
         st.write("You must wait ffor few seconds for your prediction")
+        
         if submit:
             dataset = pd.read_csv('Heart_Disease_Prediction.csv')
             X = dataset.iloc[:, 1:-1].values
@@ -842,7 +843,6 @@ Say goodbye to uncertainty and hello to proactive health management with HealthM
 
 elif nav=="General Information":
     st.title("General Information 📖🔬")
-    st_lottie(url2_json)
     genopt = st.selectbox("What do you want to know about", ("Diabetes", "Brain Tumor", "Heart Diseases", "Alzheimer", "Mental Stress"))
     if genopt=="Diabetes":
         st.title("1. DIABETES")
