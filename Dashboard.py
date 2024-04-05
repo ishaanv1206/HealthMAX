@@ -445,7 +445,7 @@ if nav=='Predictions':
                 # Part 4 - Making a single prediction
                 print(training_set.class_indices)
                 import numpy as np
-                from keras.preprocessing import image
+                
                 if uploaded_file is not None:
                     try:
                         test_image = image.load_img('uploaded_file', target_size = (64, 64))
@@ -490,7 +490,7 @@ if nav=='Predictions':
 
 # Importing the libraries
                 import tensorflow as tf
-                from keras.preprocessing.image import ImageDataGenerator
+                
 
 
                 # Part 1 - Data Preprocessing
