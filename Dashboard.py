@@ -1094,8 +1094,6 @@ elif nav=="General Information":
 
     While stress is an inevitable facet of existence, it need not reign supreme over our well-being. By comprehending the essence of stress, implementing wholesome coping mechanisms, and seeking solace when necessary, individuals can navigate life's labyrinthine passages with resilience and flourish amidst adversity. Remember, it's not about vanquishing stress entirely, but rather learning to wield it in a manner that fosters holistic health and well-being. 🌟
     ''')
-        
-
 elif nav=="About":
     st.title("About")
     st.divider()
@@ -1103,29 +1101,11 @@ elif nav=="About":
     st.divider()
     st.write("This website is created with the intent of providing a comprehensive place to know about different health-issues, to know about the recommended lifestyle to follow and other preautions. Along with the prediction feature this website is a one stop solution to know about several health related issues")
     st.divider()
-    st.write(''' ***Tech stack***: 
-             This website is made completely using python and is made on streamlit framework.
-             The Diabetes prediction model uses K-Nearest Neighbour to predit diabetes. The model has an accuracy rate of 84.94796594134343%. The dataset on which the model is trained on has 253681 patients data.
-             The stress detection through sleep uses a Support Vector Machine Model . The model has an accuracy of 100%
-             The stress detection through physiological data uses a Random Forest model. The model accuracy is 99.8%
-             The heart disease Prediction uses a Random Forest Classifier model. The model as an accuracy of 83.82352941176471%
-             The Alzheimer detection uses a Convolutional Neural Network(CNN). Accuracy on training set is 72.74%
-             The Brain Tumor detection uses a Convolutional Neural Network(CNN). Accuracy on training set is 92.38%
-             ''')
-
-
-
-    
-
-
-    
-
-
-    
-
-
-
-
-
-
-
+    st.write(''' ***Tech stack***: ''')
+    st.write('''This website is made completely using python and is made on streamlit framework.''')
+    st.write('''The Diabetes prediction model uses K-Nearest Neighbour to predit diabetes. The model has an accuracy rate of 84.94796594134343%. The dataset on which the model is trained on has 253681 patients data.''')
+    st.write('''The stress detection through sleep uses a Support Vector Machine Model . The model has an accuracy of 100%''')
+    st.write('''The stress detection through physiological data uses a Random Forest model. The model accuracy is 99.8%''')
+    st.write('''The heart disease Prediction uses a Random Forest Classifier model. The model as an accuracy of 83.82352941176471%''')
+    st.write('''The Alzheimer detection uses a Convolutional Neural Network(CNN). Accuracy on training set is 72.74%''')
+    st.write('''The Brain Tumor detection uses a Convolutional Neural Network(CNN). Accuracy on training set is 92.38%''')
