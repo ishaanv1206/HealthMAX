@@ -903,9 +903,9 @@ elif nav=="General Information":
         
 
         st.write('''***Limit Alcohol and Quit Smoking***:
-    Moderation in alcohol consumption and the decision to quit smoking not only contribute to overall health but are pivotal in diabetes prevention and management. Excessive alcohol intake can disrupt blood sugar levels, while smoking has been linked to insulin resistance. Embracing a smoke-free and moderate lifestyle not only reduces diabetes risk but also enhances the effectiveness of diabetes management strategies, fostering a healthier, more resilient life.   
+    Moderation in alcohol consumption and the decision to quit smoking not only contribute to overall health but are pivotal in diabetes prevention and management. Excessive alcohol intake can disrupt blood sugar levels, while smoking has been linked to insulin resistance. Embracing a smoke-free and moderate lifestyle not only reduces diabetes risk but also enhances the effectiveness of diabetes management strategies, fostering a healthier, more resilient life. ''')  
 
-    ***Remember:
+    st.write('''***Remember:
     This information is for general awareness only and should not be considered a substitute for professional medical advice.
     If you have concerns about your diabetes risk or are experiencing symptoms, please consult a healthcare professional.***''')
         st_lottie(url7_json)
