@@ -1,0 +1,11 @@
+streamlit
+numpy
+pandas
+matplotlib
+tensorflow
+keras
+scikit-learn
+json
+PIL
+streamlit_lottie
+requests
