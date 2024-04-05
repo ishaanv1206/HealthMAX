@@ -182,7 +182,7 @@ if nav=='Predictions':
             acc = accuracy_score(y_test, y_pred)
             new_data= [agevar, sexvar, chestpainvar, bpvar, cholestrolvar, fbsoveronevar, ecgvar, maxhrvar, exerciseanginavar, stdepressionvar, slopeofstvar, noofvesselsflurovar, thalliumvar]
 
-            result = classifier.predict(sc.transform(new_data))
+            result = classifier.predict(sc.transform([new_data]))
             if result==[0]:
                 st.markdown(":red[***You have chances of having heart disease***]")
                 st.markdown(":orange[You must always consult a doctor regarding your health. Do not take this tool as a substitute to medical proffessional]")
