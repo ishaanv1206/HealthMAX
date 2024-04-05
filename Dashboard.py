@@ -88,7 +88,7 @@ st.sidebar.title('Navigation')
 nav = st.sidebar.radio('Go to: ',('Home', 'General Information', 'Predictions', 'About'))
 if nav=='Predictions':
 
-    option =st.selectbox("What do you want to know : ", ("Diabetes Prediciton" ,"Brain tumor detection","Stress detection through sleep pattern","Human Stress Detection", "Alzheimer Prediction", "Heart Disease Prediction"))
+    option =st.selectbox("What do you want to know : ", ("Diabetes Prediciton" ,"Brain tumor detection","Stress detection through sleep pattern","Human Stress Detection based on physiological data", "Alzheimer Prediction", "Heart Disease Prediction"))
     
     
     if option=="Heart Disease Prediction":
@@ -180,11 +180,10 @@ if nav=='Predictions':
     elif option=="Human Stress Detection based on physiological data":
 
         st.title("Stress prediction using Physiological Data")
-        st_lottie(url3_json)
-        st.write('''This is our stress detection page for detecting stress usinf physiological factors.
+        st.write('''This is our stress detection page for detecting stress usinf physiological factors.''')
                  
 
-                Humidity - When you feel stress, your body temperature rises, prompting your sweat glands to kick in. This sweat is considered to be the Humidity Level.
+        st.write('''Humidity - When you feel stress, your body temperature rises, prompting your sweat glands to kick in. This sweat is considered to be the Humidity Level.
                  
                 Temperature - Body Temperature of a person during stress.
                  
@@ -271,9 +270,9 @@ if nav=='Predictions':
     elif option=="Stress detection through sleep pattern":
         st.title("Stress Prediction using sleep Pattern")
         st.write('''
-    Considering today’s lifestyle, people just sleep forgetting the benefits sleep provides to the human body. Smart-Yoga Pillow (SaYoPillow) is proposed to help in understanding the relationship between stress and sleep and to fully materialize the idea of “Smart-Sleeping” by proposing an edge device. An edge processor with a model analyzing the physiological changes that occur during sleep along with the sleeping habits is proposed. Based on these changes during sleep, stress prediction for the following day is proposed. The secure transfer of the analyzed stress data along with the average physiological changes to the IoT cloud for storage is implemented. A secure transfer of any data from the cloud to any third-party applications is also proposed. A user interface is provided allowing the user to control the data accessibility and visibility. SaYoPillow is novel, with security features as well as consideration of sleeping habits for stress reduction
+    Considering today’s lifestyle, people just sleep forgetting the benefits sleep provides to the human body. Smart-Yoga Pillow (SaYoPillow) is proposed to help in understanding the relationship between stress and sleep and to fully materialize the idea of “Smart-Sleeping” by proposing an edge device. An edge processor with a model analyzing the physiological changes that occur during sleep along with the sleeping habits is proposed. Based on these changes during sleep, stress prediction for the following day is proposed. The secure transfer of the analyzed stress data along with the average physiological changes to the IoT cloud for storage is implemented. A secure transfer of any data from the cloud to any third-party applications is also proposed. A user interface is provided allowing the user to control the data accessibility and visibility. SaYoPillow is novel, with security features as well as consideration of sleeping habits for stress reduction''')
 
-                 you will see the relationship between the parameters- snoring range of the user, respiration rate, body temperature, limb movement rate, blood oxygen levels, eye movement, number of hours of sleep, heart rate and Stress Levels          
+        st.write('''you will see the relationship between the parameters- snoring range of the user, respiration rate, body temperature, limb movement rate, blood oxygen levels, eye movement, number of hours of sleep, heart rate and Stress Levels          
 ''')
         
         snoringratevar = st.number_input("Enter your snoring rate as read by sensor")
