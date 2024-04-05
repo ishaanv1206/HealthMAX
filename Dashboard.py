@@ -183,12 +183,12 @@ if nav=='Predictions':
             new_data= [agevar, sexvar, chestpainvar, bpvar, cholestrolvar, fbsoveronevar, ecgvar, maxhrvar, exerciseanginavar, stdepressionvar, slopeofstvar, noofvesselsflurovar, thalliumvar]
 
             result = classifier.predict(sc.transform([new_data]))
-            if result==[0]:
+            if result==[1]:
                 st.markdown(":red[***You have chances of having heart disease***]")
                 st.markdown(":orange[You must always consult a doctor regarding your health. Do not take this tool as a substitute to medical proffessional]")
                 st.write("Accuray of prediction is : ")
                 st.write(acc*100)
-            elif result==[1]:
+            elif result==[0]:
                 st.markdown(":green[***You dont have chances of having heart disease***]")
                 st.markdown(":orange[You must always consult a doctor regarding your health. Do not take this tool as a substitute to medical proffessional]")
                 st.write("Accuray of prediction is : ")
