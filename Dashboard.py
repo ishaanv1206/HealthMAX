@@ -140,45 +140,57 @@ if nav=='Predictions':
         st.write("You must wait ffor few seconds for your prediction")
         if submit:
             import numpy as np
-            import matplotlib.pyplot as plt
-            import pandas as pd
-            dataset = pd.read_csv('Heart_Disease_Prediction.csv')
-            X = dataset.iloc[:, :-1].values
-            y = dataset.iloc[:, -1].values
-            from sklearn.preprocessing import LabelEncoder
-            le = LabelEncoder()
-            y = le.fit_transform(y)
+        import matplotlib.pyplot as plt
+        import pandas as pd
+
+        # Importing the dataset
+        dataset = pd.read_csv('Heart_Disease_Prediction.csv')
+        X = dataset.iloc[:, :-1].values
+        y = dataset.iloc[:, -1].values
+        from sklearn.preprocessing import LabelEncoder
+        le = LabelEncoder()
+        y = le.fit_transform(y)
 
 
-            # Splitting the dataset into the Training set and Test set
-            from sklearn.model_selection import train_test_split
-            X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.25, random_state = 0)
+        #   Splitting the dataset into the Training set and Test set
+        from sklearn.model_selection import train_test_split
+        X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.25, random_state = 0)
 
 
-            # Feature Scaling
-            from sklearn.preprocessing import StandardScaler
-            sc = StandardScaler()
-            X_train = sc.fit_transform(X_train)
-            X_test = sc.transform(X_test)
-            print(X_train)
-            print(X_test)
+        # Feature Scaling
+        from sklearn.preprocessing import StandardScaler
+        sc = StandardScaler()
+        X_train = sc.fit_transform(X_train)
+        X_test = sc.transform(X_test)
+        print(X_train)
+        print(X_test)
 
-            # Training the Random Forest Classification model on the Training set
-            from sklearn.ensemble import RandomForestClassifier
-            classifier = RandomForestClassifier(n_estimators = 10, criterion = 'entropy', random_state = 0)
-            classifier.fit(X_train, y_train)
+        # Training the Random Forest Classification model on the Training set
+        from sklearn.ensemble import RandomForestClassifier
+        classifier = RandomForestClassifier(n_estimators = 10, criterion = 'entropy', random_state = 0)
+        classifier.fit(X_train, y_train)
 
-            # Predicting a new result
-            print(classifier.predict(sc.transform([[agevar, sexvar, chestpainvar, bpvar, cholestrolvar, fbsoveronevar, ecgvar, maxhrvar, exerciseanginavar, stdepressionvar, slopeofstvar, noofvesselsflurovar, thalliumvar]])))
+        # Predicting a new result
 
-            # Predicting the Test set results
-            y_pred = classifier.predict(X_test)
-            print(np.concatenate((y_pred.reshape(len(y_pred),1), y_test.reshape(len(y_test),1)),1))
+        # Predicting the Test set results
+        y_pred = classifier.predict(X_test)
+        print(np.concatenate((y_pred.reshape(len(y_pred),1), y_test.reshape(len(y_test),1)),1))
 
-            # Making the Confusion Matrix
-            from sklearn.metrics import confusion_matrix, accuracy_score
-            cm = confusion_matrix(y_test, y_pred)
-            acc_score = accuracy_score(y_test, y_pred)
+        # Making the Confusion Matrix
+        from sklearn.metrics import confusion_matrix, accuracy_score
+        cm = confusion_matrix(y_test, y_pred)
+        acc = accuracy_score(y_test, y_pred)
+        result = classifier.predict([[67,0,3,115,564,0,2,160,0,1.6,2,0,7]])
+        if result==[0]:
+            st.markdown(":red[***You have chances of having heart disease***]")
+            st.markdown(":orange[You must always consult a doctor regarding your health. Do not take this tool as a substitute to medical proffessional]")
+            st.write("Accuray of prediction is : ")
+            st.write(acc*100)
+        elif result==[1]:
+            st.markdown(":green[***You dont have chances of having heart disease***]")
+            st.markdown(":orange[You must always consult a doctor regarding your health. Do not take this tool as a substitute to medical proffessional]")
+            st.write("Accuray of prediction is : ")
+            st.write(acc*100)
 
     elif option=="Human Stress Detection based on physiological data":
 
