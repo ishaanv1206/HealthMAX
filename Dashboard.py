@@ -183,16 +183,14 @@ if nav=='Predictions':
         st.write('''This is our stress detection page for detecting stress usinf physiological factors.''')
                  
 
-        st.write('''Humidity - When you feel stress, your body temperature rises, prompting your sweat glands to kick in. This sweat is considered to be the Humidity Level.
+        st.write('''Humidity - When you feel stress, your body temperature rises, prompting your sweat glands to kick in. This sweat is considered to be the Humidity Level.''')
                  
-                Temperature - Body Temperature of a person during stress.
+        st.write('''Temperature - Body Temperature of a person during stress.''')
                  
-                Stepcount - Number of steps covered by the person during his stressful situation.
+        st.write('''Stepcount - Number of steps covered by the person during his stressful situation.''')        
                  
-                Stress_Level - Based on all the above 3 Factors our Stress Level will be predicted as High, Medium and Low accordingly.
+        st.write('''Stress_Level - Based on all the above 3 Factors our Stress Level will be predicted as High, Medium and Low accordingly.''')       
                  
-                 
-                 ''')
         
         humidityvar = st.number_input("Enter your body humidity level during stress")
         temperaturevar = st.number_input("Enter your body temperature during stress in Fahrenheit")
