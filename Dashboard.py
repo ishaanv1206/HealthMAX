@@ -143,7 +143,7 @@ if nav=='Predictions':
             import matplotlib.pyplot as plt
             import pandas as pd
             dataset = pd.read_csv('Heart_Disease_Prediction.csv')
-            X = dataset.iloc[:, 1:-1].values
+            X = dataset.iloc[:, :-1].values
             y = dataset.iloc[:, -1].values
             from sklearn.preprocessing import LabelEncoder
             le = LabelEncoder()
@@ -800,6 +800,7 @@ if nav=='Predictions':
             dataset = pd.read_csv('diabetesdata.csv')
             X = dataset.iloc[:, 1:18].values
             y = dataset.iloc[:, 0].values
+
             from sklearn.model_selection import train_test_split
             X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.25, random_state = 0)
 
@@ -810,6 +811,9 @@ if nav=='Predictions':
             from sklearn.neighbors import KNeighborsClassifier
             classifier = KNeighborsClassifier(n_neighbors = 6, metric = 'minkowski', p = 2)
             classifier.fit(X_train, y_train)
+
+
+
             from sklearn.metrics import confusion_matrix, accuracy_score
             y_pred = classifier.predict(X_test)
             print(accuracy_score(y_test, y_pred))
@@ -840,6 +844,7 @@ With our advanced algorithms, we provide accurate predictions for diabetes, hear
 
 Say goodbye to uncertainty and hello to proactive health management with HealthMAX. Try now and embark on a journey towards a healthier, happier you 😊.
 ''')
+
 elif nav=="General Information":
     st.title("General Information 📖🔬")
     st_lottie(url2_json)
