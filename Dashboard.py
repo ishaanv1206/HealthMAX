@@ -6,7 +6,6 @@ import json
 import requests 
 from streamlit_lottie import st_lottie 
 import tensorflow as tf
-import keras
 
 #loading animations
 
@@ -138,7 +137,7 @@ if nav=='Predictions':
         noofvesselsflurovar =st.number_input("Enter the Number of vessels fluro", step=1)
         thalliumvar =st.number_input("Enter your Thallium", step=1)
         submit = st.button("Submit")
-        st.write("You must wait for few seconds for your prediction")
+        st.write("You must wait ffor few seconds for your prediction")
         if submit:
             import numpy as np
         import matplotlib.pyplot as plt
@@ -175,7 +174,7 @@ if nav=='Predictions':
 
         # Predicting the Test set results
         y_pred = classifier.predict(X_test)
-        
+        print(np.concatenate((y_pred.reshape(len(y_pred),1), y_test.reshape(len(y_test),1)),1))
 
         # Making the Confusion Matrix
         from sklearn.metrics import confusion_matrix, accuracy_score
@@ -217,7 +216,7 @@ if nav=='Predictions':
 
 
         submit = st.button("Submit")
-        st.write("You must wait for few seconds for your prediction")
+        st.write("You must wait ffor few seconds for your prediction")
         if submit:
 
             import numpy as np
@@ -298,7 +297,7 @@ if nav=='Predictions':
         sleepinghoursvar = st.number_input("Enter your number of sleeping hours as read by sensor")
         heartratevarvar = st.number_input("Enter your heart rate as read by sensor")
         submit = st.button("Submit")
-        st.write("You must wait for few seconds for your prediction")
+        st.write("You must wait ffor few seconds for your prediction")
 
         if submit:
 
@@ -338,7 +337,7 @@ if nav=='Predictions':
 
             # Predicting the Test set results
             y_pred = classifier.predict(X_test)
-            
+            print(np.concatenate((y_pred.reshape(len(y_pred),1), y_test.reshape(len(y_test),1)),1))
 
             # Making the Confusion Matrix
             from sklearn.metrics import confusion_matrix, accuracy_score
@@ -388,7 +387,7 @@ if nav=='Predictions':
 
                 # Importing the libraries
                 import tensorflow as tf
-                
+                from keras.preprocessing.image import ImageDataGenerator
                 tf.__version__
 
                 # Part 1 - Data Preprocessing
@@ -445,7 +444,7 @@ if nav=='Predictions':
                 # Part 4 - Making a single prediction
                 print(training_set.class_indices)
                 import numpy as np
-                
+                from keras.preprocessing import image
                 if uploaded_file is not None:
                     try:
                         test_image = image.load_img('uploaded_file', target_size = (64, 64))
@@ -455,20 +454,12 @@ if nav=='Predictions':
                         training_set.class_indices
                         if result[0][0] == 0:
                             prediction = 'Mild-Demented'
-                            st.subheader("Result : " + prediction)
-                            st.write("Accuracy for 15 epochs is 74.03%")
                         elif result[0][0] == 1:
                             prediction = 'Moderate-Demented'
-                            st.subheader("Result : " + prediction)
-                            st.write("Accuracy for 15 epochs is 74.03%")
                         elif result[0][0] == 2:
                             prediction = 'Non-Demented'
-                            st.subheader("Result : " + prediction)
-                            st.write("Accuracy for 15 epochs is 74.03%")
                         elif result[0][0] == 3:
                             prediction = 'VeryMildDemented'
-                            st.subheader("Result : " + prediction)
-                            st.write("Accuracy for 15 epochs is 74.03%")
                     except:
                         st.write("There is error in file provided")
                     st.subheader("Result : " + prediction)
@@ -490,7 +481,7 @@ if nav=='Predictions':
 
 # Importing the libraries
                 import tensorflow as tf
-                
+                from keras.preprocessing.image import ImageDataGenerator
 
 
                 # Part 1 - Data Preprocessing
@@ -547,7 +538,7 @@ if nav=='Predictions':
                 # Part 4 - Making a single prediction
                 print(training_set.class_indices)
                 import numpy as np
-                
+                from keras.preprocessing import image
                 if uploaded_file is not None:
                     try:
                         test_image = image.load_img('uploaded_file', target_size = (64, 64))
@@ -557,24 +548,16 @@ if nav=='Predictions':
                         training_set.class_indices
                         if result[0][0] == 0:
                             prediction = 'Glioma'
-                            st.subheader("Result : " + prediction)
-                            st.write("Accuracy for 15 epochs is 92.38%")
                         elif result[0][0] == 1:
                             prediction = 'Meningioma'
-                            st.subheader("Result : " + prediction)
-                            st.write("Accuracy for 15 epochs is 92.38%")
                         elif result[0][0] == 2:
                             prediction = 'No Tumor'
-                            st.subheader("Result : " + prediction)
-                            st.write("Accuracy for 15 epochs is 92.38%")
                         elif result[0][0] == 3:
                             prediction = 'pituitary'
-                            st.subheader("Result : " + prediction)
-                            st.write("Accuracy for 15 epochs is 92.38%")
-                            
                     except:
                         st.write("There is error in file provided")
-                    
+                    st.subheader("Result : " + prediction)
+                    st.write("Accuracy for 15 epochs is 74.03%")
                 elif uploaded_file is None:
                     st.markdown(":red[Please enter a image]")
 
