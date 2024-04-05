@@ -137,7 +137,7 @@ if nav=='Predictions':
         noofvesselsflurovar =st.number_input("Enter the Number of vessels fluro", step=1)
         thalliumvar =st.number_input("Enter your Thallium", step=1)
         submit = st.button("Submit")
-        st.write("You must wait ffor few seconds for your prediction")
+        st.write("You must wait for few seconds for your prediction")
         if submit:
             import numpy as np
         import matplotlib.pyplot as plt
@@ -216,7 +216,7 @@ if nav=='Predictions':
 
 
         submit = st.button("Submit")
-        st.write("You must wait ffor few seconds for your prediction")
+        st.write("You must wait for few seconds for your prediction")
         if submit:
 
             import numpy as np
@@ -297,7 +297,7 @@ if nav=='Predictions':
         sleepinghoursvar = st.number_input("Enter your number of sleeping hours as read by sensor")
         heartratevarvar = st.number_input("Enter your heart rate as read by sensor")
         submit = st.button("Submit")
-        st.write("You must wait ffor few seconds for your prediction")
+        st.write("You must wait for few seconds for your prediction")
 
         if submit:
 
