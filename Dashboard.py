@@ -791,6 +791,9 @@ if nav=='Predictions':
         submit = st.button("Submit")
         st.write("You must wait for 20 seconds for your prediction")
         if submit:
+            import numpy as np
+            import matplotlib.pyplot as plt
+            import pandas as pd
             #Creating ML Model
             dataset = pd.read_csv('diabetesdata.csv')
             X = dataset.iloc[:, 1:18].values
