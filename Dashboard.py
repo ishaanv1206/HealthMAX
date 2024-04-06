@@ -500,7 +500,7 @@ if nav=='Predictions':
             return prediction
 
         def main():
-            st.title('Alzheimer Disease Prediction')
+            
             uploaded_file = st.file_uploader("Choose an image...", type="jpg")
             # Display the submit button
             submitted = st.button("Submit")
