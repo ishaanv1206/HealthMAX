@@ -377,17 +377,12 @@ if nav=='Predictions':
                 st.write("Accuracy of prediction is: ")
                 st.write(acc * 100)
 
-    elif option=="Alzheimer Prediction":
+    elif option=="Brain tumor detection":
 
-        st.title("Alzheimer Disease Prediction")
-        # Importing the libraries
         import streamlit as st
         import tensorflow as tf
         from tensorflow.keras.preprocessing.image import img_to_array, load_img
         import numpy as np
-        import os
-
-        # Load and preprocess the Training set
         import os
 
         def load_and_preprocess_images(directory, target_size=(64, 64)):
@@ -404,44 +399,18 @@ if nav=='Predictions':
                     labels.append(label_index)
             return np.array(images), np.array(labels)
 
-# Usage example
-
-
-        training_images, training_labels = load_and_preprocess_images('Traintumordetection')
-
-        # Load and preprocess the Test set
-        test_images, test_labels = load_and_preprocess_images('Testtumordetection')
-
-        # Build the CNN model
         def build_model():
-            # Initialising the CNN
             cnn = tf.keras.models.Sequential()
-
-            # Step 1 - Convolution
             cnn.add(tf.keras.layers.Conv2D(filters=32, kernel_size=3, activation='relu', input_shape=[64, 64, 3]))
-
-            # Step 2 - Pooling
             cnn.add(tf.keras.layers.MaxPool2D(pool_size=2, strides=2))
-
-            # Adding a second convolutional layer
             cnn.add(tf.keras.layers.Conv2D(filters=32, kernel_size=3, activation='relu'))
             cnn.add(tf.keras.layers.MaxPool2D(pool_size=2, strides=2))
-
-            # Step 3 - Flattening
             cnn.add(tf.keras.layers.Flatten())
-
-            # Step 4 - Full Connection
             cnn.add(tf.keras.layers.Dense(units=128, activation='relu'))
-
-            # Step 5 - Output Layer
-            cnn.add(tf.keras.layers.Dense(units=4, activation='softmax'))  # 4 units for 4 classes
-
-            # Compiling the CNN
+            cnn.add(tf.keras.layers.Dense(units=4, activation='softmax'))  
             cnn.compile(optimizer = 'adam', loss = 'sparse_categorical_crossentropy', metrics = ['accuracy'])
-
             return cnn
 
-        # Function to make prediction
         def predict_single_image(image, model):
             image = img_to_array(image.resize((64, 64))) / 255.0
             image = np.expand_dims(image, axis=0)
@@ -451,24 +420,35 @@ if nav=='Predictions':
             prediction = label_map_inverse[predicted_label_index]
             return prediction
 
-        # Streamlit app
         def main():
             st.title('Brain Tumor Classification')
 
-            # Train the model
-            model = build_model()
-            model.fit(x=training_images, y=training_labels, epochs=25, validation_data=(test_images, test_labels))
+            # Display the submit button
+            submitted = st.button("Submit")
 
-            uploaded_file = st.file_uploader("Choose an image...", type="jpg")
+            if submitted:
+                # Load and preprocess the data
+                training_images, training_labels = load_and_preprocess_images('Traintumordetection')
+                test_images, test_labels = load_and_preprocess_images('Testtumordetection')
 
-            if uploaded_file is not None:
-                image = load_img(uploaded_file)
-                st.image(image, caption='Uploaded Image', use_column_width=True)
-                prediction = predict_single_image(image, model)
-                st.write('Prediction:', prediction)
+                # Build the model
+                model = build_model()
+
+                # Train the model
+                model.fit(x=training_images, y=training_labels, epochs=25, validation_data=(test_images, test_labels))
+
+                # File uploader for image selection
+                uploaded_file = st.file_uploader("Choose an image...", type="jpg")
+
+                if uploaded_file is not None:
+                    image = load_img(uploaded_file)
+                    st.image(image, caption='Uploaded Image', use_column_width=True)
+                    prediction = predict_single_image(image, model)
+                    st.write('Prediction:', prediction)
 
         if __name__ == '__main__':
             main()
+
 
          
 
@@ -476,17 +456,15 @@ if nav=='Predictions':
                         
 
 
-    elif option=="Brain tumor detection":
+    elif option=="Alzheimer Prediction":
 
         st.title("Alzheimer Disease Prediction")
-        # Importing the libraries
         import streamlit as st
         import tensorflow as tf
         from tensorflow.keras.preprocessing.image import img_to_array, load_img
         import numpy as np
         import os
 
-        # Load and preprocess the Training set
         def load_and_preprocess_images(directory, target_size=(64, 64)):
             images = []
             labels = []
@@ -501,66 +479,53 @@ if nav=='Predictions':
                     labels.append(label_index)
             return np.array(images), np.array(labels)
 
-        training_images, training_labels = load_and_preprocess_images('trainalzheimer')
-
-        # Load and preprocess the Test set
-        test_images, test_labels = load_and_preprocess_images('testalzheimer')
-
-        # Build the CNN model
         def build_model():
-            # Initialising the CNN
             cnn = tf.keras.models.Sequential()
-
-            # Step 1 - Convolution
             cnn.add(tf.keras.layers.Conv2D(filters=32, kernel_size=3, activation='relu', input_shape=[64, 64, 3]))
-
-            # Step 2 - Pooling
             cnn.add(tf.keras.layers.MaxPool2D(pool_size=2, strides=2))
-
-            # Adding a second convolutional layer
             cnn.add(tf.keras.layers.Conv2D(filters=32, kernel_size=3, activation='relu'))
             cnn.add(tf.keras.layers.MaxPool2D(pool_size=2, strides=2))
-
-            # Step 3 - Flattening
             cnn.add(tf.keras.layers.Flatten())
-
-            # Step 4 - Full Connection
             cnn.add(tf.keras.layers.Dense(units=128, activation='relu'))
-
-            # Step 5 - Output Layer
-            cnn.add(tf.keras.layers.Dense(units=4, activation='softmax'))  # 4 units for 4 classes
-
-            # Compiling the CNN
+            cnn.add(tf.keras.layers.Dense(units=4, activation='softmax'))  
             cnn.compile(optimizer = 'adam', loss = 'sparse_categorical_crossentropy', metrics = ['accuracy'])
-
             return cnn
 
-        # Function to make prediction
         def predict_single_image(image, model):
             image = img_to_array(image.resize((64, 64))) / 255.0
             image = np.expand_dims(image, axis=0)
             result = model.predict(image)
             predicted_label_index = np.argmax(result)
-            label_map_inverse = {0: 'glioma', 1: 'meningioma', 2: 'notumor', 3: 'pituitary'}
+            label_map_inverse = {0: 'MildDemented', 1: 'ModerateDemented', 2: 'NonDemented', 3: 'VeryMildDemented'}
             prediction = label_map_inverse[predicted_label_index]
             return prediction
 
-        # Streamlit app
         def main():
-            st.title('Alzheimer Classification')
+            st.title('Alzheimer Disease Prediction')
 
-            # Train the model
-            model = build_model()
-            model.fit(x=training_images, y=training_labels, epochs=25, validation_data=(test_images, test_labels))
+            # Display the submit button
+            submitted = st.button("Submit")
 
-            uploaded_file = st.file_uploader("Choose an image...", type="jpg")
+            if submitted:
+                # Load and preprocess the data
+                training_images, training_labels = load_and_preprocess_images('trainalzheimer')
+                test_images, test_labels = load_and_preprocess_images('testalzheimer')
 
-            if uploaded_file is not None:
-                image = load_img(uploaded_file)
-                st.image(image, caption='Uploaded Image', use_column_width=True)
-                prediction = predict_single_image(image, model)
-                st.write('Prediction:', prediction)
+                # Build the model
+                model = build_model()
 
+                # Train the model
+                model.fit(x=training_images, y=training_labels, epochs=25, validation_data=(test_images, test_labels))
+    
+                # File uploader for image selection
+                uploaded_file = st.file_uploader("Choose an image...", type="jpg")
+
+                if uploaded_file is not None:
+                    image = load_img(uploaded_file)
+                    st.image(image, caption='Uploaded Image', use_column_width=True)
+                    prediction = predict_single_image(image, model)
+                    st.write('Prediction:', prediction)
+    
         if __name__ == '__main__':
             main()
 
