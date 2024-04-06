@@ -405,8 +405,7 @@ if nav=='Predictions':
             return np.array(images), np.array(labels)
 
 # Usage example
-training_images, training_labels = load_and_preprocess_images('trainbraintumor')
-test_images, test_labels = load_and_preprocess_images('testbrain tumor')
+
 
         training_images, training_labels = load_and_preprocess_images('traintumordetection')
 
