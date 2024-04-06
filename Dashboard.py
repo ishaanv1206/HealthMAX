@@ -399,7 +399,7 @@ if nav=='Predictions':
                     labels.append(label_index)
             return np.array(images), np.array(labels)
 
-        def build_model():
+        def build_model(weights_path):
             cnn = tf.keras.models.Sequential()
             cnn.add(tf.keras.layers.Conv2D(filters=32, kernel_size=3, activation='relu', input_shape=[64, 64, 3]))
             cnn.add(tf.keras.layers.MaxPool2D(pool_size=2, strides=2))
@@ -407,8 +407,12 @@ if nav=='Predictions':
             cnn.add(tf.keras.layers.MaxPool2D(pool_size=2, strides=2))
             cnn.add(tf.keras.layers.Flatten())
             cnn.add(tf.keras.layers.Dense(units=128, activation='relu'))
-            cnn.add(tf.keras.layers.Dense(units=4, activation='softmax'))  
-            cnn.compile(optimizer = 'adam', loss = 'sparse_categorical_crossentropy', metrics = ['accuracy'])
+            cnn.add(tf.keras.layers.Dense(units=4, activation='softmax'))
+            cnn.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
+    
+            # Load pre-trained weights
+            cnn.load_weights(weights_path)
+    
             return cnn
 
         def predict_single_image(image, model):
@@ -425,21 +429,16 @@ if nav=='Predictions':
             uploaded_file = st.file_uploader("Choose an image...", type="jpg")
             # Display the submit button
             submitted = st.button("Submit")
-            st.write("It may take 2-3 minutes to predict the image, afterall its a computer and not a MBBS graduate 😜")
+            st.write("It may take 2-3 minutes to predict the image, after all it's a computer and not a MBBS graduate 😜")
             if submitted:
                 # Load and preprocess the data
                 training_images, training_labels = load_and_preprocess_images('Traintumordetection')
                 test_images, test_labels = load_and_preprocess_images('Testtumordetection')
 
-                # Build the model
-                model = build_model()
-
-                # Train the model
-                model.fit(x=training_images, y=training_labels, epochs=25, validation_data=(test_images, test_labels))
+                # Build the model with pre-trained weights
+                model = build_model("weights.25-0.13.h5")
 
                 # File uploader for image selection
-                
-
                 if uploaded_file is not None:
                     image = load_img(uploaded_file)
                     st.image(image, caption='Uploaded Image', use_column_width=True)
