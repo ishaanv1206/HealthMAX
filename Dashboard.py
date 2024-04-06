@@ -425,7 +425,7 @@ if nav=='Predictions':
             uploaded_file = st.file_uploader("Choose an image...", type="jpg")
             # Display the submit button
             submitted = st.button("Submit")
-
+            st.write("It may take 2-3 minutes to predict the image, afterall its a computer and not a MBBS graduate 😜")
             if submitted:
                 # Load and preprocess the data
                 training_images, training_labels = load_and_preprocess_images('Traintumordetection')
@@ -505,7 +505,7 @@ if nav=='Predictions':
             uploaded_file = st.file_uploader("Choose an image...", type="jpg")
             # Display the submit button
             submitted = st.button("Submit")
-
+            st.write("It may take 2-3 minutes to predict the image, afterall its a computer and not a MBBS graduate 😜")
             if submitted:
                 # Load and preprocess the data
                 training_images, training_labels = load_and_preprocess_images('trainalzheimer')
