@@ -490,7 +490,7 @@ if nav=='Predictions':
         def load_and_preprocess_images(directory, target_size=(64, 64)):
             images = []
             labels = []
-            label_map = {'glioma': 0, 'meningioma': 1, 'notumor': 2, 'pituitary': 3}
+            label_map = {'MildDemented': 0, 'ModerateDemented': 1, 'NonDemented': 2, 'VeryMildDemented': 3}
             for label, label_index in label_map.items():
                 label_dir = os.path.join(directory, label)
                 for filename in os.listdir(label_dir):
