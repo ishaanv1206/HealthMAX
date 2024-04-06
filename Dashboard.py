@@ -380,94 +380,94 @@ if nav=='Predictions':
     elif option=="Alzheimer Prediction":
 
         st.title("Alzheimer Disease Prediction")
-        uploaded_file = st.file_uploader("Choose a image to predict Alzheimer")
-        submit = st.button("Submit")
-        st.write("It may take 2-3 minutes to predict the image, afterall its a computer and not a MBBS graduate 😜")
-        if submit:
+        # Importing the libraries
+        import streamlit as st
+        import tensorflow as tf
+        from tensorflow.keras.preprocessing.image import img_to_array, load_img
+        import numpy as np
+        import os
+
+        # Load and preprocess the Training set
+        def load_and_preprocess_images(directory, target_size=(64, 64)):
+            images = []
+            labels = []
+            label_map = {'glioma': 0, 'meningioma': 1, 'notumor': 2, 'pituitary': 3}
+            for label, label_index in label_map.items():
+                for filename in os.listdir(os.path.join(directory, label)):
+                    img_path = os.path.join(directory, label, filename)
+                    image = load_img(img_path, target_size=target_size)
+                    image = img_to_array(image) / 255.0  # Normalization
+                    images.append(image)
+                    labels.append(label_index)
+            return np.array(images), np.array(labels)
+
+        training_images, training_labels = load_and_preprocess_images('dataset/training_set')
+
+        # Load and preprocess the Test set
+        test_images, test_labels = load_and_preprocess_images('dataset/test_set')
+
+        # Build the CNN model
+        def build_model():
+            # Initialising the CNN
+            cnn = tf.keras.models.Sequential()
+
+            # Step 1 - Convolution
+            cnn.add(tf.keras.layers.Conv2D(filters=32, kernel_size=3, activation='relu', input_shape=[64, 64, 3]))
+
+            # Step 2 - Pooling
+            cnn.add(tf.keras.layers.MaxPool2D(pool_size=2, strides=2))
+
+            # Adding a second convolutional layer
+            cnn.add(tf.keras.layers.Conv2D(filters=32, kernel_size=3, activation='relu'))
+            cnn.add(tf.keras.layers.MaxPool2D(pool_size=2, strides=2))
+
+            # Step 3 - Flattening
+            cnn.add(tf.keras.layers.Flatten())
+
+            # Step 4 - Full Connection
+            cnn.add(tf.keras.layers.Dense(units=128, activation='relu'))
+
+            # Step 5 - Output Layer
+            cnn.add(tf.keras.layers.Dense(units=4, activation='softmax'))  # 4 units for 4 classes
+
+            # Compiling the CNN
+            cnn.compile(optimizer = 'adam', loss = 'sparse_categorical_crossentropy', metrics = ['accuracy'])
+
+            return cnn
+
+        # Function to make prediction
+        def predict_single_image(image, model):
+            image = img_to_array(image.resize((64, 64))) / 255.0
+            image = np.expand_dims(image, axis=0)
+            result = model.predict(image)
+            predicted_label_index = np.argmax(result)
+            label_map_inverse = {0: 'glioma', 1: 'meningioma', 2: 'notumor', 3: 'pituitary'}
+            prediction = label_map_inverse[predicted_label_index]
+            return prediction
+
+        # Streamlit app
+        def main():
+            st.title('Brain Tumor Classification')
+
+            # Train the model
+            model = build_model()
+            model.fit(x=training_images, y=training_labels, epochs=25, validation_data=(test_images, test_labels))
+
+            uploaded_file = st.file_uploader("Choose an image...", type="jpg")
+
             if uploaded_file is not None:
-                # Convolutional Neural Network
+                image = load_img(uploaded_file)
+                st.image(image, caption='Uploaded Image', use_column_width=True)
+                prediction = predict_single_image(image, model)
+                st.write('Prediction:', prediction)
 
-                # Importing the libraries
-                import tensorflow as tf
-                from keras.preprocessing.image import ImageDataGenerator
-                tf.__version__
+        if __name__ == '__main__':
+            main()
 
-                # Part 1 - Data Preprocessing
+         
 
-                # Preprocessing the Training set
-                train_datagen = ImageDataGenerator(rescale = 1./255,
-                                                shear_range = 0.2,
-                                                zoom_range = 0.2,
-                                                horizontal_flip = True)
-                training_set = train_datagen.flow_from_directory('trainalzheimer',
-                                                                target_size = (64, 64),
-                                                                batch_size = 32,
-                                                                class_mode = 'categorical')
-
-                # Preprocessing the Test set
-                test_datagen = ImageDataGenerator(rescale = 1./255)
-                test_set = test_datagen.flow_from_directory('testalzheimer',
-                                                            target_size = (64, 64),
-                                                            batch_size = 32,
-                                                            class_mode = 'categorical')
-
-                # Part 2 - Building the CNN
-
-                # Initialising the CNN
-                cnn = tf.keras.models.Sequential()
-
-                # Step 1 - Convolution
-                cnn.add(tf.keras.layers.Conv2D(filters=32, kernel_size=3, activation='relu', input_shape=[64, 64, 3]))
-
-                # Step 2 - Pooling
-                cnn.add(tf.keras.layers.MaxPool2D(pool_size=2, strides=2))
-
-                # Adding a second convolutional layer
-                cnn.add(tf.keras.layers.Conv2D(filters=32, kernel_size=3, activation='relu'))
-                cnn.add(tf.keras.layers.MaxPool2D(pool_size=2, strides=2))
-
-                # Step 3 - Flattening
-                cnn.add(tf.keras.layers.Flatten())
-
-                # Step 4 - Full Connection
-                cnn.add(tf.keras.layers.Dense(units=128, activation='relu'))
-
-                # Step 5 - Output Layer
-                cnn.add(tf.keras.layers.Dense(units=4, activation='softmax'))
-
-                # Part 3 - Training the CNN
-
-                # Compiling the CNN
-                cnn.compile(optimizer = 'adam', loss = 'categorical_crossentropy', metrics = ['accuracy'])
-
-                # Training the CNN on the Training set and evaluating it on the Test set
-                cnn.fit(x = training_set, validation_data = test_set, epochs = 15)
-
-                # Part 4 - Making a single prediction
-                print(training_set.class_indices)
-                import numpy as np
-                from keras.preprocessing import image
-                if uploaded_file is not None:
-                    try:
-                        test_image = image.load_img('uploaded_file', target_size = (64, 64))
-                        test_image = image.img_to_array(test_image)
-                        test_image = np.expand_dims(test_image, axis = 0)
-                        result = cnn.predict(test_image)
-                        training_set.class_indices
-                        if result[0][0] == 0:
-                            prediction = 'Mild-Demented'
-                        elif result[0][0] == 1:
-                            prediction = 'Moderate-Demented'
-                        elif result[0][0] == 2:
-                            prediction = 'Non-Demented'
-                        elif result[0][0] == 3:
-                            prediction = 'VeryMildDemented'
-                    except:
-                        st.write("There is error in file provided")
-                    st.subheader("Result : " + prediction)
-                    st.write("Accuracy for 15 epochs is 74.03%")
-                elif uploaded_file is None:
-                    st.markdown(":red[Please enter a image]")
+                
+                        
 
 
     elif option=="Brain tumor detection":
