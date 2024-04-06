@@ -388,18 +388,25 @@ if nav=='Predictions':
         import os
 
         # Load and preprocess the Training set
+        import os
+
         def load_and_preprocess_images(directory, target_size=(64, 64)):
             images = []
             labels = []
             label_map = {'glioma': 0, 'meningioma': 1, 'notumor': 2, 'pituitary': 3}
             for label, label_index in label_map.items():
-                for filename in os.listdir(os.path.join(directory, label)):
-                    img_path = os.path.join(directory, label, filename)
+                label_dir = os.path.join(directory, label)
+                for filename in os.listdir(label_dir):
+                    img_path = os.path.join(label_dir, filename)
                     image = load_img(img_path, target_size=target_size)
                     image = img_to_array(image) / 255.0  # Normalization
                     images.append(image)
                     labels.append(label_index)
             return np.array(images), np.array(labels)
+
+# Usage example
+training_images, training_labels = load_and_preprocess_images('trainbraintumor')
+test_images, test_labels = load_and_preprocess_images('testbrain tumor')
 
         training_images, training_labels = load_and_preprocess_images('traintumordetection')
 
@@ -486,8 +493,9 @@ if nav=='Predictions':
             labels = []
             label_map = {'glioma': 0, 'meningioma': 1, 'notumor': 2, 'pituitary': 3}
             for label, label_index in label_map.items():
-                for filename in os.listdir(os.path.join(directory, label)):
-                    img_path = os.path.join(directory, label, filename)
+                label_dir = os.path.join(directory, label)
+                for filename in os.listdir(label_dir):
+                    img_path = os.path.join(label_dir, filename)
                     image = load_img(img_path, target_size=target_size)
                     image = img_to_array(image) / 255.0  # Normalization
                     images.append(image)
