@@ -422,7 +422,7 @@ if nav=='Predictions':
 
         def main():
             st.title('Brain Tumor Classification')
-
+            uploaded_file = st.file_uploader("Choose an image...", type="jpg")
             # Display the submit button
             submitted = st.button("Submit")
 
@@ -438,7 +438,7 @@ if nav=='Predictions':
                 model.fit(x=training_images, y=training_labels, epochs=25, validation_data=(test_images, test_labels))
 
                 # File uploader for image selection
-                uploaded_file = st.file_uploader("Choose an image...", type="jpg")
+                
 
                 if uploaded_file is not None:
                     image = load_img(uploaded_file)
@@ -502,7 +502,7 @@ if nav=='Predictions':
 
         def main():
             st.title('Alzheimer Disease Prediction')
-
+            uploaded_file = st.file_uploader("Choose an image...", type="jpg")
             # Display the submit button
             submitted = st.button("Submit")
 
@@ -518,7 +518,7 @@ if nav=='Predictions':
                 model.fit(x=training_images, y=training_labels, epochs=25, validation_data=(test_images, test_labels))
     
                 # File uploader for image selection
-                uploaded_file = st.file_uploader("Choose an image...", type="jpg")
+                
 
                 if uploaded_file is not None:
                     image = load_img(uploaded_file)
