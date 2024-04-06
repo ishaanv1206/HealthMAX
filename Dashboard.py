@@ -407,10 +407,10 @@ if nav=='Predictions':
 # Usage example
 
 
-        training_images, training_labels = load_and_preprocess_images('traintumordetection')
+        training_images, training_labels = load_and_preprocess_images('Traintumordetection')
 
         # Load and preprocess the Test set
-        test_images, test_labels = load_and_preprocess_images('testtumordetection')
+        test_images, test_labels = load_and_preprocess_images('Testtumordetection')
 
         # Build the CNN model
         def build_model():
